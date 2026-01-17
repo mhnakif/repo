@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  app:
+    image: mhnakif/repo:latest
+    stdin_open: true
+    tty: true
+    ports:
+      - "28188:8188"
+      - "28080:8080"
+    ipc: host
+    ulimits:
+      memlock: -1
+      stack: 67108864
+    tmpfs:
+      - /workspace/scratch:size=200G
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
