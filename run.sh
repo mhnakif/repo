@@ -1,1 +1,1 @@
-sudo docker compose run --rm --service-ports app
+sudo docker compose run --rm --service-ports app "$@"
