@@ -20,3 +20,4 @@ SQLAlchemy
 av>=14.2.0
 comfy-kitchen>=0.2.6
 comfyui_manager==4.0.5
+pydantic~=2.0
