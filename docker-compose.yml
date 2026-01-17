@@ -3,6 +3,8 @@ services:
     image: mhnakif/repo:latest
     stdin_open: true
     tty: true
+    environment:
+      - pass
     ports:
       - "28188:8188"
       - "28080:8080"
