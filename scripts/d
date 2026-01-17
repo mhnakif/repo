@@ -8,32 +8,39 @@ if [ "$#" -lt 2 ]; then
   exit 1
 fi
 
-target="$1"
-shift
+download_models() {
+  local models_root="/workspace/scratch/comfy/models"
+  local target="$1"
+  local dest_dir=""
+  shift
 
-case "$target" in
-  l|lora)
-    dest_dir="./models/loras"
-    ;;
-  u|unet)
-    dest_dir="./models/unet"
-    ;;
-  c|clip)
-    dest_dir="./models/clip"
-    ;;
-  v|vae)
-    dest_dir="./models/vae"
-    ;;
-  *)
-    echo "Unknown target: $target"
-    echo "Targets: l|lora, u|unet, c|clip, v|vae"
-    exit 1
-    ;;
-esac
+  case "$target" in
+    l|lora)
+      dest_dir="${models_root}/loras"
+      ;;
+    u|unet)
+      dest_dir="${models_root}/unet"
+      ;;
+    c|clip)
+      dest_dir="${models_root}/clip"
+      ;;
+    v|vae)
+      dest_dir="${models_root}/vae"
+      ;;
+    *)
+      echo "Unknown target: $target"
+      echo "Targets: l|lora, u|unet, c|clip, v|vae"
+      exit 1
+      ;;
+  esac
 
-mkdir -p "$dest_dir"
+  mkdir -p "$dest_dir"
 
-for url in "$@"; do
-  file_name="$(basename "${url%%\?*}")"
-  aria2c -x16 -o "$file_name" -d "$dest_dir" "$url"
-done
+  for url in "$@"; do
+    local file_name
+    file_name="$(basename "${url%%\?*}")"
+    aria2c -x16 -o "$file_name" -d "$dest_dir" "$url"
+  done
+}
+
+download_models "$@"

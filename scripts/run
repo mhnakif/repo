@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export HF_TOKEN="$(
+  echo 'U2FsdGVkX18Dm3BvugXuNPyn8oZDpNE/PssyWrC5cnT/foRt5Snh8BoJeqjZgrhyyiiWw7J32/0UEmv8qYW7FA==' | \
+  openssl enc -aes-256-cbc -pbkdf2 -d -a -A -k "$pass"
+)"
+
+hf download mhnakif/comfy --local-dir=/workspace/scratch/comfy
