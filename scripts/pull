@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+hf download mhnakif/comfy --local-dir=/workspace/scratch/comfy
