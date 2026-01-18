@@ -17,3 +17,4 @@ fi
 if ! pgrep -f "code-server --auth none --bind-addr 0.0.0.0:8080" >/dev/null 2>&1; then
   code-server --auth none --bind-addr 0.0.0.0:8080 &
 fi
+wait
