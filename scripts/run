@@ -10,4 +10,6 @@ if [ ! -d /workspace/scratch/comfy ]; then
   hf download mhnakif/comfy --local-dir=/workspace/scratch/comfy
 fi
 
-python scratch/comfy/main.py --highvram --listen 0.0.0.0 &
+if ! pgrep -f "/workspace/scratch/comfy/main.py" >/dev/null 2>&1; then
+  python /workspace/scratch/comfy/main.py --highvram --listen 0.0.0.0 &
+fi
