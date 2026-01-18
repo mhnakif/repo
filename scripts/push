@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+hf upload mhnakif/comfy /workspace/scratch/comfy .
