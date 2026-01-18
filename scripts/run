@@ -6,4 +6,8 @@ export HF_TOKEN="$(
   openssl enc -aes-256-cbc -pbkdf2 -d -a -A -k "$pass"
 )"
 
-hf download mhnakif/comfy --local-dir=/workspace/scratch/comfy
+if [ ! -d /workspace/scratch/comfy ]; then
+  hf download mhnakif/comfy --local-dir=/workspace/scratch/comfy
+fi
+
+python scratch/comfy/main.py --highvram --listen 0.0.0.0 &
