@@ -6,6 +6,15 @@ export HF_TOKEN="$(
   openssl enc -aes-256-cbc -pbkdf2 -d -a -A -k "$pass"
 )"
 
+export CIVITAI_TOKEN="$(
+  echo 'U2FsdGVkX1/ofQskqAA4QPznIuDe5+PA/WyERAn+qv7vudgX4ICjvL5BvBweabEjx2LvnN0NLP4mLH9SH3Zn3A==' | \
+  openssl enc -aes-256-cbc -pbkdf2 -d -a -A -k "$pass"
+)"
+
+mkdir -p "${HOME}/.civitai"
+printf '%s' "${CIVITAI_TOKEN}" > "${HOME}/.civitai/config"
+chmod 600 "${HOME}/.civitai/config"
+
 if [ ! -d /workspace/scratch/comfy ]; then
   hf download mhnakif/comfy --local-dir=/workspace/scratch/comfy
 fi
