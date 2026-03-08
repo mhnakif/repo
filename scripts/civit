@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+  echo "Usage: $0 <civitai-download-url> [output-filename]"
+  exit 1
+fi
+
+repo_dir="/workspace/civitai-downloader"
+repo_url="https://github.com/mhnakif/civitai-downloader.git"
+url="$1"
+output_name="${2:-}"
+
+if [ ! -d "$repo_dir" ]; then
+  git clone "$repo_url" "$repo_dir"
+fi
+
+if [ ! -f "$repo_dir/download.py" ]; then
+  echo "Missing downloader script: $repo_dir/download.py"
+  exit 1
+fi
+
+if [ -z "$output_name" ]; then
+  output_name="$(basename "${url%%\?*}")"
+fi
+
+if [ -z "$output_name" ] || [ "$output_name" = "." ] || [ "$output_name" = "/" ]; then
+  output_name="model"
+fi
+
+if [[ "$output_name" != *.safetensors ]]; then
+  if [[ "$output_name" == *.* ]]; then
+    output_name="${output_name%.*}.safetensors"
+  else
+    output_name="${output_name}.safetensors"
+  fi
+fi
+
+python "$repo_dir/download.py" "$url" "$output_name"
