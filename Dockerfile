@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/pytorch:25.11-py3
+FROM nvcr.io/nvidia/pytorch:26.05-py3
 
 # Aria2
 RUN pip install --no-cache-dir aria2
