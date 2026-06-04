@@ -16,7 +16,7 @@ COPY requirements/ /tmp/requirements/
 RUN pip install --no-cache-dir -r /tmp/requirements/comfy.txt \    
   && pip install --no-cache-dir -r /tmp/requirements/easyuse.txt \
   && pip install --no-cache-dir -r /tmp/requirements/kjnodes.txt \
-  && pip install --no-cache-dir -r /tmp/requirements/videohelper.tx \
+  && pip install --no-cache-dir -r /tmp/requirements/videohelper.txt \
   && pip install --no-cache-dir --no-deps torchaudio
 
 
